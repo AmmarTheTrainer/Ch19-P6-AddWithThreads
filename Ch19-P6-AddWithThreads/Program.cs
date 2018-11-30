@@ -17,8 +17,10 @@ namespace Ch19_P6_AddWithThreads
                                 Thread.CurrentThread.ManagedThreadId);
             // Make an AddParams object to pass to the secondary thread.
             AddParamsClass ap = new AddParamsClass(10, 10);
-            Thread t = new Thread(new ParameterizedThreadStart(Add));
-            t.Start(ap);
+            Thread thread = new Thread(new ParameterizedThreadStart(Add));
+            // This is now a background Thread
+            thread.IsBackground = true;
+            thread.Start(ap);
             // Force a wait to let other thread finish.
             //Thread.Sleep(5);
             Console.WriteLine(" waiting for the other thread to give green signal to move on ");
